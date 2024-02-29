@@ -1,0 +1,12 @@
+[
+    {"id":1,"title":"Producto Prueba 1","description":"Pellentesque eget nunc.","price":618,"thumbnail": "","code":"68428-056","stock":4},
+    {"id":2,"title":"Producto Prueba 2","description":"Lorem ipsum dolor sit amet.","price":950,"thumbnail": "","code":"60949-160","stock":15},
+    {"id":3,"title":"Producto Prueba 3","description":"Proin risus.","price":585,"thumbnail": "","code":"43063-308","stock":9},
+    {"id":4,"title":"Producto Prueba 4","description":"Nullam varius.","price":439,"thumbnail": "","code":"43353-879","stock":5},
+    {"id":5,"title":"Producto Prueba 5","description":"In eleifend quam a odio.","price":665,"thumbnail":"","code":"64117-212","stock":15},
+    {"id":6,"title":"Producto Prueba 6","description":"Duis aliquam convallis nunc.","price":982,"thumbnail": "","code":"58443-0021","stock":13},
+    {"id":7,"title":"Producto Prueba 7","description":"In hac habitasse platea dictumst.","price":940,"thumbnail": "","code":"55111-223","stock":16},
+    {"id":8,"title":"Producto Prueba 8","description":"Suspendisse potenti.","price":416,"thumbnail": "","code":"0378-0042","stock":2},
+    {"id":9,"title":"Producto Prueba 9","description":"Integer tincidunt ante vel ipsum.","price":216,"thumbnail": "","code":"0781-2266","stock":9},
+    {"id":10,"title":"Producto Prueba 10","description":"Morbi a ipsum.","price":997,"thumbnail": "","code":"54868-5064","stock":15}
+]
