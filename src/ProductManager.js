@@ -8,16 +8,16 @@ export default class ProductManager {
         this.#nextId = 0
     }
 
-    getProducts() {
+    async getProducts() {
         try {
-            const data = JSON.parse(fs.readFileSync(this.path));
-            return data;
+            const data = await fs.promises.readFile(this.path, 'utf8');
+            return JSON.parse(data);
         } catch (error) {
             throw error;
         }
     }
 
-    addProduct(productObj) {
+    async addProduct(productObj) {
         // Validates required fields
         const requiredFields = ['title', 'description', 'price', 'thumbnail', 'code', 'stock'];
         for (const field of requiredFields) {
@@ -27,7 +27,7 @@ export default class ProductManager {
         }
 
         // field "code" doesn't appear twice
-        let fileProducts = this.getProducts();
+        let fileProducts = await this.getProducts();
         if (fileProducts.some(product => product.code === productObj.code)) {
             return `Error: code ${productObj.code} already exists.`;
         }
@@ -38,12 +38,12 @@ export default class ProductManager {
             ...productObj
         };
         fileProducts.push(newProduct);
-        this._saveProductsToFile(fileProducts);
+        await this._saveProductsToFile(fileProducts);
         return "Product added.";
     }
 
-    getProductById(id) {
-        let fileProducts = this.getProducts();
+    async getProductById(id) {
+        let fileProducts = await this.getProducts();
         const product = fileProducts.find(product => product.id === id);
         if (product) {
             return product;
@@ -52,31 +52,31 @@ export default class ProductManager {
         }
     }
 
-    updateProduct(id, productData) {
-        let fileProducts = this.getProducts();
+    async updateProduct(id, productData) {
+        let fileProducts = await this.getProducts();
         const productIndex = fileProducts.findIndex(product => product.id === id);
         if (productIndex === -1) {
             return `Error: Product with id ${id} not found.`;
         }
         const updatedProduct = { ...fileProducts[productIndex], ...productData };
         fileProducts[productIndex] = updatedProduct;
-        this._saveProductsToFile(fileProducts);
+        await this._saveProductsToFile(fileProducts);
         return "Product updated.";
     }
 
-    deleteProduct(id) {
-        let fileProducts = this.getProducts();
+    async deleteProduct(id) {
+        let fileProducts = await this.getProducts();
         const productIndex = fileProducts.findIndex(product => product.id === id);
         if (productIndex === -1) {
             return `Error: Product with id ${id} not found.`;
         }
         fileProducts.splice(productIndex, 1);
-        this._saveProductsToFile(fileProducts);
+        await this._saveProductsToFile(fileProducts);
         return "Product deleted.";
     }
 
-    _saveProductsToFile(productData) {
+    async _saveProductsToFile(productData) {
         const data = JSON.stringify(productData, null, "\t");
-        fs.writeFileSync(this.path, data);
+        await fs.promises.writeFileSync(this.path, data);
     }
 }
